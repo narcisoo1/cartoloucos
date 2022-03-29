@@ -36,11 +36,16 @@ class Employee {
 			$resultset = mysqli_query($this->conn, $sql) or die("database error:". mysqli_error($this->conn));
 			$row = mysqli_fetch_assoc($resultset);
 			if((mysqli_num_rows($resultset) == 1) && (sha1($user_password) == $row['usr_senha'])){
-				$_SESSION['username'] = $row['usr_nome'];
-				$_SESSION["id_usuario"]= $row["usr_id"];
-				$_SESSION["nome_usuario"] = explode(" ",$row["usr_nomeFull"])[0];
-				$_SESSION["permissao"]= $row["usr_tipo"];
-				echo "1";
+				if($row["usr_tipo"]==5){
+					echo "Usuário Bloqueado.";
+				}else{
+					$_SESSION['username'] = $row['usr_nome'];
+					$_SESSION["id_usuario"]= $row["usr_id"];
+					$_SESSION["nome_usuario"] = explode(" ",$row["usr_nomeFull"])[0];
+					$_SESSION["permissao"]= $row["usr_tipo"];
+					echo "1";
+				}
+				
 			} else {
 				echo "Dados inválidos."; // wrong details
 			}

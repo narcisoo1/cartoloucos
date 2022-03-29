@@ -1,5 +1,4 @@
 <?php
-//fetch.php
 include 'api/api.php';
 if(isset($_POST["post_id"]))
 {
