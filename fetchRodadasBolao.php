@@ -1,13 +1,27 @@
 <?php
 include 'api/api.php';
+include 'conecta.php';
+$db = new dbObj();
+$conn =  $db->getConnstring();
+
 if(isset($_POST["post_id"]))
 {
+ $control=false;
+ $p1=null;
+ $p2=null;
+ $query = "SELECT * FROM palpite where usuario_usr_id='$_SESSION[id_usuario]' and rodada='$_POST[post_id]'";
+ $result = mysqli_query($conn, $query);
+ $qtd = mysqli_num_rows($result);
+ if ($result->num_rows > 0) {
+     $control=true;
+     $row = $result->fetch_assoc();
+ }
  $data_1=$_POST["post_id"]-1;
  $data_2=$_POST["post_id"]+1;
  $if_previous_disable='';
  $if_next_disable='';
  $output = '';
-  if($_POST["post_id"]==1)
+  if($_POST["post_id"]==(ultimaRodada()+1))
   {
    $if_previous_disable = 'disabled';
    $data_1=null;
@@ -37,6 +51,10 @@ if(isset($_POST["post_id"]))
     <div class="row">';
 
     for($i = 0 ; $i < 10; $i++){
+        if($control){
+            $p1=$row['j'.($i+1).'_t1'];
+            $p2=$row['j'.($i+1).'_t2'];
+        }
     $output .= "
     <div class='col-lg-6 mb-4'>
         <div class='bg-light p-4 rounded'>
@@ -47,7 +65,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-1 text-center'>
                             <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
-                            <input type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
+                            <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
                         </div>
                         <div>
                             <span class='vs'><span>VS</span></span>
@@ -55,7 +73,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-2 text-center'>
                             <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
-                            <input type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
+                            <input value='".$p1."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
                         </div>
                     </div>
                 </form>

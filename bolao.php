@@ -5,7 +5,10 @@ include 'conecta.php';
 
 $db = new dbObj();
 $conn =  $db->getConnstring();
-
+if(!isset($_SESSION["username"]) || !isset($_SESSION["id_usuario"])){
+  header("Location: login.php");
+exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -131,8 +134,9 @@ $conn =  $db->getConnstring();
         
         <div class="row">
           <?php
+            $id_rodada=ultimaRodada()+1;
             $control=false;
-            $p1=0;
+            $p1=null;
             $p2=null;
             $query = "SELECT * FROM palpite where usuario_usr_id='$_SESSION[id_usuario]' and rodada=1";
             $result = mysqli_query($conn, $query);
@@ -142,7 +146,7 @@ $conn =  $db->getConnstring();
               $row = $result->fetch_assoc();
             }
             $const = 123754;
-            $id_rodada=1;
+            
             $data = json_decode($json);
             $rodada = json_decode(rodada($id_rodada),true);
             $id_partida = 123754+(($id_rodada-1)*10);
@@ -331,7 +335,6 @@ $conn =  $db->getConnstring();
       var my_array = new Array();
       var control = 1;
       var rodada = document.getElementById('numrodada').name;
-      alert(rodada);
       for(var i=0;i<10;i++){
         my_array[i+'_1'] = document.getElementById(i+'_1').value;
         my_array[i+'_2'] = document.getElementById(i+'_2').value;
