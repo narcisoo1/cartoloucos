@@ -159,7 +159,7 @@ $conn =  $db->getConnstring();
                   <form id='f".$i."' name='".$id_partida."'>
                     <div class='d-flex align-items-center justify-content-around justify-content-between w-100'>
                       <div class='team-1 text-center'>
-                        <img src='".json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao']."' alt='Image'>
+                        <img src='http://e.imguol.com/futebol/brasoes/40x40/atletico-mg.png' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
                         <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
                       </div>
