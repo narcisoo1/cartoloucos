@@ -131,14 +131,26 @@ $conn =  $db->getConnstring();
         
         <div class="row">
           <?php
-          
+            $control=false;
+            $p1=0;
+            $p2=null;
+            $query = "SELECT * FROM palpite where usuario_usr_id='$_SESSION[id_usuario]' and rodada=1";
+            $result = mysqli_query($conn, $query);
+            $qtd = mysqli_num_rows($result);
+            if ($result->num_rows > 0) {
+              $control=true;
+              $row = $result->fetch_assoc();
+            }
             $const = 123754;
             $id_rodada=1;
             $data = json_decode($json);
             $rodada = json_decode(rodada($id_rodada),true);
             $id_partida = 123754+(($id_rodada-1)*10);
             for($i = 0 ; $i < 10; $i++){
-              
+              if($control){
+                $p1=$row['j'.($i+1).'_t1'];
+                $p2=$row['j'.($i+1).'_t2'];
+              }
               echo "
             <div class='col-lg-6 mb-4'>
               <div class='bg-light p-4 rounded'>
@@ -149,7 +161,7 @@ $conn =  $db->getConnstring();
                       <div class='team-1 text-center'>
                         <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
-                        <input type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
+                        <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
                       </div>
                       <div>
                         <span class='vs'><span>VS</span></span>
@@ -157,7 +169,7 @@ $conn =  $db->getConnstring();
                       <div class='team-2 text-center'>
                         <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
-                        <input type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
+                        <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
                       </div>
                     </div>
                   </form>

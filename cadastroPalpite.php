@@ -9,6 +9,12 @@ if(isset($_POST["idjogador"]))
     $jogador=$_POST["idjogador"];
     $rodada=$_POST["rodada"];
 
+    #$query = "UPDATE usuario SET usr_tipo=5 where usr_id='$_POST[post_id]'";
+    $query1 = "SELECT * FROM palpite WHERE usuario_usr_id='$jogador'";
+    $result1 = mysqli_query($conn, $query);
+    if ($result1->num_rows > 0) {
+        $query="UPDATE usuario SET usr_tipo=5 where usr_id='$_POST[post_id]'";
+    }
     $my_array=array();
     for($i=0;$i<10;$i++){
         $my_array[$i.'_1']=$_POST["j".$i."t1"];
