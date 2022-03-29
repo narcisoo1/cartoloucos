@@ -151,7 +151,6 @@ $conn =  $db->getConnstring();
                 $p1=$row['j'.($i+1).'_t1'];
                 $p2=$row['j'.($i+1).'_t2'];
               }
-              $taloko='src="http://e.imguol.com/futebol/brasoes/40x40/atletico-mg.png"';
               echo "
             <div class='col-lg-6 mb-4'>
               <div class='bg-light p-4 rounded'>
@@ -160,7 +159,7 @@ $conn =  $db->getConnstring();
                   <form id='f".$i."' name='".$id_partida."'>
                     <div class='d-flex align-items-center justify-content-around justify-content-between w-100'>
                       <div class='team-1 text-center'>
-                        <img ".$taloko." alt='Image'>
+                        <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
                         <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
                       </div>

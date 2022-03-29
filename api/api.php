@@ -6,7 +6,7 @@
     #function __construct($ano=0, $campeonato=0){
       #$json = file_get_contents("db_br.json");
       
-      $json = file_get_contents("D:/wamp64/www/cartoloucos_site/api/db_br.json");
+      $json = file_get_contents("https://raw.githubusercontent.com/narcisoo1/cartoloucos/main/api/db_br.json");
 
       $data = json_decode($json);
     
