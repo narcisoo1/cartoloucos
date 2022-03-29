@@ -381,7 +381,13 @@ exit;
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                    <p>
+                        Copyright &copy;
+                        <script>
+                        document.write(new Date().getFullYear());
+                        </script> All rights reserved <i class="icon-heart"
+                        aria-hidden="true"></i> by <a href="https://instagram.com/narcisoo1/" target="_blank">Narciso</a>
+                    </p>
                     </div>
                 </div>
             </footer>
