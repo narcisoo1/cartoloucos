@@ -42,6 +42,7 @@ class Employee {
 					$_SESSION['username'] = $row['usr_nome'];
 					$_SESSION["id_usuario"]= $row["usr_id"];
 					$_SESSION["nome_usuario"] = explode(" ",$row["usr_nomeFull"])[0];
+					$_SESSION["nome_usuarioFull"] = $row["usr_nomeFull"];
 					$_SESSION["permissao"]= $row["usr_tipo"];
 					echo "1";
 				}

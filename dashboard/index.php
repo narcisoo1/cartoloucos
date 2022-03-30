@@ -60,7 +60,7 @@ exit;
             
             <!-- Nav Item - Conta -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="conta.php">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
                     <span>Conta</span></a>
             </li>
