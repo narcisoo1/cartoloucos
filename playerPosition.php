@@ -1,5 +1,10 @@
 <?php
-session_start();
+include ("conecta.php");
+include ("pontuacao.php");
+
+$db = new dbObj();
+$conn =  $db->getConnstring();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -99,8 +104,8 @@ session_start();
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-5 mx-auto text-center">
-            <h1 class="text-white">Players</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, molestias repudiandae pariatur.</p>
+            <h1 class="text-white">Classificação</h1>
+            <p>Tela de classificação dos competidores em duas vertentes, Pontuação da Última Rodada e Anual.</p>
           </div>
         </div>
       </div>
@@ -117,78 +122,95 @@ session_start();
                 <thead>
                   <tr>
                     <th>P</th>
-                    <th>Team</th>
-                    <th>V</th>
-                    <th>E</th>
-                    <th>D</th>
+                    <th>Competidor</th>
+                    <th>Acertos</th>
+                    <th>Parcial</th>
+                    <th>Erros</th>
                     <th>PTS</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><strong class="text-white">Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><strong class="text-white">Soccer</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td><strong class="text-white">Juvendo</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td><strong class="text-white">French Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td><strong class="text-white">Legia Abante</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td><strong class="text-white">Gliwice League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td><strong class="text-white">Cornika</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td><strong class="text-white">Gravity Smash</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
+                  <?php
+                    $control=0;
+                    $array=array();
+                    $participantes=array();
+                    $aux=array();
+                    $queryuser = "SELECT * FROM usuario";
+                    $resultuser = mysqli_query($conn, $queryuser);
+                    $qtd = mysqli_num_rows($resultuser);
+                    if ($resultuser->num_rows > 0) {
+                      while($rowuser = $resultuser->fetch_assoc()){
+                        $participantes[$control]=pontosGerais($rowuser);
+                        $control++;
+                      }
+                    }
+                    $control=0;
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']<=$participantes[$j]['pontos']){
+                          $aux=$participantes[$j];
+                          $participantes[$j]=$participantes[$j+1];
+                          $participantes[$j+1]=$aux;
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']>=$participantes[$j]['t']){
+                            $aux=$participantes[$j];
+                            $participantes[$j]=$participantes[$j+1];
+                            $participantes[$j+1]=$aux;
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']==$participantes[$j]['t']){
+                            if($participantes[$j+1]['p']>=$participantes[$j]['p']){
+                              $aux=$participantes[$j];
+                              $participantes[$j]=$participantes[$j+1];
+                              $participantes[$j+1]=$aux;
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']==$participantes[$j]['t']){
+                            if($participantes[$j+1]['p']==$participantes[$j]['p']){
+                              if($participantes[$j+1]['e']<=$participantes[$j]['e']){
+                                $aux=$participantes[$j];
+                                $participantes[$j]=$participantes[$j+1];
+                                $participantes[$j+1]=$aux;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      echo '
+                        <tr>
+                          <td>'.$i.'</td>
+                          <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
+                          <td>'.$participantes[$i]['t'].'</td>
+                          <td>'.$participantes[$i]['p'].'</td>
+                          <td>'.$participantes[$i]['e'].'</td>
+                          <td>'.$participantes[$i]['pontos'].'</td>
+                        </tr>
+                      ';
+                    }
+
+                  ?>
                 </tbody>
               </table>
             </div>
@@ -200,78 +222,96 @@ session_start();
                 <thead>
                   <tr>
                     <th>P</th>
-                    <th>Team</th>
-                    <th>V</th>
-                    <th>E</th>
-                    <th>D</th>
+                    <th>Competidor</th>
+                    <th>Acertos</th>
+                    <th>Parcial</th>
+                    <th>Erros</th>
                     <th>PTS</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><strong class="text-white">Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><strong class="text-white">Soccer</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td><strong class="text-white">Juvendo</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td><strong class="text-white">French Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td><strong class="text-white">Legia Abante</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td><strong class="text-white">Gliwice League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td><strong class="text-white">Cornika</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td><strong class="text-white">Gravity Smash</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
+                <?php
+                    $control=0;
+                    $array=array();
+                    $participantes=array();
+                    $aux=array();
+                    $queryuser = "SELECT * FROM usuario";
+                    $resultuser = mysqli_query($conn, $queryuser);
+                    $qtd = mysqli_num_rows($resultuser);
+                    if ($resultuser->num_rows > 0) {
+                      while($rowuser = $resultuser->fetch_assoc()){
+                        $rowuser['rodada']=ultimaRodada();
+                        $participantes[$control]=pontosGeraisRodada($rowuser);
+                        $control++;
+                      }
+                    }
+                    $control=0;
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']<=$participantes[$j]['pontos']){
+                          $aux=$participantes[$j];
+                          $participantes[$j]=$participantes[$j+1];
+                          $participantes[$j+1]=$aux;
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']>=$participantes[$j]['t']){
+                            $aux=$participantes[$j];
+                            $participantes[$j]=$participantes[$j+1];
+                            $participantes[$j+1]=$aux;
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']==$participantes[$j]['t']){
+                            if($participantes[$j+1]['p']>=$participantes[$j]['p']){
+                              $aux=$participantes[$j];
+                              $participantes[$j]=$participantes[$j+1];
+                              $participantes[$j+1]=$aux;
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      for($j=0;$j<count($participantes)-1;$j++){
+                        if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
+                          if($participantes[$j+1]['t']==$participantes[$j]['t']){
+                            if($participantes[$j+1]['p']==$participantes[$j]['p']){
+                              if($participantes[$j+1]['e']<=$participantes[$j]['e']){
+                                $aux=$participantes[$j];
+                                $participantes[$j]=$participantes[$j+1];
+                                $participantes[$j+1]=$aux;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    for($i=0;$i<count($participantes);$i++){
+                      echo '
+                        <tr>
+                          <td>'.$i.'</td>
+                          <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
+                          <td>'.$participantes[$i]['t'].'</td>
+                          <td>'.$participantes[$i]['p'].'</td>
+                          <td>'.$participantes[$i]['e'].'</td>
+                          <td>'.$participantes[$i]['pontos'].'</td>
+                        </tr>
+                      ';
+                    }
+
+                  ?>
                 </tbody>
               </table>
             </div>

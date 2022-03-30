@@ -73,7 +73,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-2 text-center'>
                             <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
-                            <input value='".$p1."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
+                            <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
                         </div>
                     </div>
                 </form>
