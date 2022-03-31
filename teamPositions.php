@@ -65,8 +65,12 @@ $classificacao = json_decode(classificacao(true),true);
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php" class="nav-link">Home</a></li>
-                <li><a href="matches.php" class="nav-link">Matches</a></li>
-                <li><a href="players.html" class="nav-link">Players</a></li>
+                <li><a href="matches.php" class="nav-link">Partidas</a></li>
+                <?php
+                  if(isset($_SESSION["username"]) || isset($_SESSION["id_usuario"])){
+                    echo '<li><a href="bolao.php" class="nav-link">Bolão</a></li>';
+                  }
+                ?>
                 <li class="has-children">
                   <a>Classificação</a>
                   <ul class="dropdown">
@@ -74,7 +78,7 @@ $classificacao = json_decode(classificacao(true),true);
                     <li><a href="playerPosition.php">Competidores</a></li>
                   </ul>
                 </li>
-                <li><a href="contact.php" class="nav-link">Contact</a></li>
+                <li><a href="contact.php" class="nav-link">Contato</a></li>
                 <?php
                   if(!isset($_SESSION["username"]) || !isset($_SESSION["id_usuario"])){
                     echo '<li><a href="login.php" class="btn btn-primary border-width-2 d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a></li>';
@@ -105,7 +109,7 @@ $classificacao = json_decode(classificacao(true),true);
         <div class="row align-items-center">
           <div class="col-lg-5 mx-auto text-center">
             <h1 class="text-white">Classificação</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, molestias repudiandae pariatur.</p>
+            <p>Classificação do campeonato Brasileiro Série A 2022.</p>
           </div>
         </div>
       </div>

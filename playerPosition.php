@@ -66,8 +66,12 @@ $conn =  $db->getConnstring();
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php" class="nav-link">Home</a></li>
-                <li><a href="matches.html" class="nav-link">Matches</a></li>
-                <li><a href="players.html" class="nav-link">Players</a></li>
+                <li><a href="matches.html" class="nav-link">Partidas</a></li>
+                <?php
+                  if(isset($_SESSION["username"]) || isset($_SESSION["id_usuario"])){
+                    echo '<li><a href="bolao.php" class="nav-link">Bolão</a></li>';
+                  }
+                ?>
                 <li class="has-children">
                   <a>Classificação</a>
                   <ul class="dropdown">
@@ -75,7 +79,7 @@ $conn =  $db->getConnstring();
                     <li class="active"><a href="playerPosition.php">Competidores</a></li>
                   </ul>
                 </li>
-                <li><a href="contact.php" class="nav-link">Contact</a></li>
+                <li><a href="contact.php" class="nav-link">Contato</a></li>
                 <?php
                   if(!isset($_SESSION["username"]) || !isset($_SESSION["id_usuario"])){
                     echo '<li><a href="login.php" class="btn btn-primary border-width-2 d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a></li>';
@@ -117,6 +121,7 @@ $conn =  $db->getConnstring();
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
+            <strong class="text-white">Pontuação Anual</strong>
             <div class="widget-next-match">
               <table class="table custom-table">
                 <thead>
@@ -135,7 +140,7 @@ $conn =  $db->getConnstring();
                     $array=array();
                     $participantes=array();
                     $aux=array();
-                    $queryuser = "SELECT * FROM usuario";
+                    $queryuser = "SELECT * FROM usuario WHERE usr_tipo!=5";
                     $resultuser = mysqli_query($conn, $queryuser);
                     $qtd = mysqli_num_rows($resultuser);
                     if ($resultuser->num_rows > 0) {
@@ -217,6 +222,7 @@ $conn =  $db->getConnstring();
           </div>
 
           <div class="col-lg-6">
+            <strong class="text-white">Pontuação Última Rodada</strong>
             <div class="widget-next-match">
               <table class="table custom-table">
                 <thead>
@@ -235,7 +241,7 @@ $conn =  $db->getConnstring();
                     $array=array();
                     $participantes=array();
                     $aux=array();
-                    $queryuser = "SELECT * FROM usuario";
+                    $queryuser = "SELECT * FROM usuario WHERE usr_tipo!=5";
                     $resultuser = mysqli_query($conn, $queryuser);
                     $qtd = mysqli_num_rows($resultuser);
                     if ($resultuser->num_rows > 0) {

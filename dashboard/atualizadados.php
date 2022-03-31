@@ -1,13 +1,12 @@
 <?php
+include '../conecta.php';
 include('../pontuacao.php');
 if(!isset($_SESSION["username"]) || !isset($_SESSION["id_usuario"])){
     header("Location: ../login.php");
 exit;
 }
 
-include '../conecta.php';
-$db = new dbObj();
-$conn =  $db->getConnstring();
+$conn =  $connect;
     if(isset($_GET['dados'])){
         $username = $_POST['username'];
         $nomeFull = $_POST['nomeFull'];
@@ -88,6 +87,15 @@ $conn =  $db->getConnstring();
                         echo $script;
                         die();
                     }
+                }else{
+                    $script = <<<EOT
+                    <script type="text/javascript">
+                        alert('Senha incorreta!');
+                        window.location.href="conta.php";
+                    </script>
+                    EOT;
+                    echo $script;
+                    die();
                 }
             }else{
                 $script = <<<EOT
