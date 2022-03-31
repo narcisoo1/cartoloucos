@@ -6,9 +6,13 @@
     #function __construct($ano=0, $campeonato=0){
       #$json = file_get_contents("db_br.json");
       
+      $url_api = "http://jsuol.com.br/c/monaco/utils/gestor/commons.js?callback=simulador_dados_jsonp&file=commons.uol.com.br/sistemas/esporte/modalidades/futebol/campeonatos/dados/2022/30/dados.json";
+
+      $json_dados  = json_decode(substr(trim(str_replace('simulador_dados_jsonp(','',file_get_contents($url_api))),0,-2));
+
       $json = file_get_contents("https://raw.githubusercontent.com/narcisoo1/cartoloucos/main/api/db_br.json");
 
-      $data = json_decode($json);
+      $data = $json_dados;
     
       #echo classificacao(true);
       

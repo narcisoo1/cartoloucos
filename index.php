@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'api/api.php';
+$classificacao = json_decode(classificacao(true),true);
 ?>
 
 <!DOCTYPE html>
@@ -152,84 +154,6 @@ session_start();
         </div>
       </div>
     </div>
-  
-    <!--
-    <div class="latest-news">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 title-section">
-            <h2 class="heading">Latest News</h2>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <div class="post-entry">
-              <a href="#">
-                <img src="images/img_1.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="caption">
-                <div class="caption-inner">
-                  <h3 class="mb-3">Romolu to stay at Real Nadrid?</h3>
-                  <div class="author d-flex align-items-center">
-                    <div class="img mb-2 mr-3">
-                      <img src="images/person_1.jpg" alt="">
-                    </div>
-                    <div class="text">
-                      <h4>Mellissa Allison</h4>
-                      <span>May 19, 2020 &bullet; Sports</span>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="post-entry">
-              <a href="#">
-                <img src="images/img_3.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="caption">
-                <div class="caption-inner">
-                  <h3 class="mb-3">Kai Nets Double To Secure Comfortable Away Win</h3>
-                  <div class="author d-flex align-items-center">
-                    <div class="img mb-2 mr-3">
-                      <img src="images/person_1.jpg" alt="">
-                    </div>
-                    <div class="text">
-                      <h4>Mellissa Allison</h4>
-                      <span>May 19, 2020 &bullet; Sports</span>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="post-entry">
-              <a href="#">
-                <img src="images/img_2.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="caption">
-                <div class="caption-inner">
-                  <h3 class="mb-3">Dogba set for Juvendu return?</h3>
-                  <div class="author d-flex align-items-center">
-                    <div class="img mb-2 mr-3">
-                      <img src="images/person_1.jpg" alt="">
-                    </div>
-                    <div class="text">
-                      <h4>Mellissa Allison</h4>
-                      <span>May 19, 2020 &bullet; Sports</span>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    -->
     
     <div class="site-section bg-dark">
       <div class="container">
@@ -272,7 +196,7 @@ session_start();
           <div class="col-lg-6">
             
             <div class="widget-next-match">
-              <table class="table custom-table">
+            <table class="table custom-table">
                 <thead>
                   <tr>
                     <th>P</th>
@@ -284,70 +208,20 @@ session_start();
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><strong class="text-white">Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><strong class="text-white">Soccer</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td><strong class="text-white">Juvendo</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td><strong class="text-white">French Football League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td><strong class="text-white">Legia Abante</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td><strong class="text-white">Gliwice League</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td><strong class="text-white">Cornika</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td><strong class="text-white">Gravity Smash</strong></td>
-                    <td>22</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>140</td>
-                  </tr>
+                  <?php
+                  for($i=1;$i<=8;$i++){
+                    echo '
+                    <tr>
+                      <td>'.$i.'</td>
+                      <td><img src="'.json_decode(equipe(($classificacao[$i]['id'])),true)['brasao'].'" width="25px"/><strong class="text-white">'.json_decode(equipe(($classificacao[$i]['id'])),true)['nome-comum'].'</strong></td>
+                      <td>'.$classificacao[$i]['v']['total'].'</td>
+                      <td>'.$classificacao[$i]['e']['total'].'</td>
+                      <td>'.$classificacao[$i]['d']['total'].'</td>
+                      <td>'.$classificacao[$i]['pg']['total'].'</td>
+                    </tr>';
+                  }
+                 
+                  ?>
                 </tbody>
               </table>
             </div>

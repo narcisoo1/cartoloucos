@@ -66,7 +66,7 @@ $conn =  $db->getConnstring();
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php" class="nav-link">Home</a></li>
-                <li><a href="matches.html" class="nav-link">Partidas</a></li>
+                <li><a href="matches.php" class="nav-link">Partidas</a></li>
                 <?php
                   if(isset($_SESSION["username"]) || isset($_SESSION["id_usuario"])){
                     echo '<li><a href="bolao.php" class="nav-link">Bolão</a></li>';
