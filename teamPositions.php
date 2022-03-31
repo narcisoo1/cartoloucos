@@ -2,7 +2,7 @@
 session_start();
 include 'api/api.php';
 $classificacao = json_decode(classificacao(true),true);
-#echo ($classificacao[1]['id']);
+#print_r ($classificacao);
 ?>
 
 <!DOCTYPE html>

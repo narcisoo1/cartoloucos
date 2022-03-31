@@ -99,12 +99,18 @@
         $tabela = array();
 
         foreach ($classificacao->equipe as $key => $value) {
-          $tabela[$value->pos] = $value;
+          $control=(-1);
+          for ($i=0;$i<20;$i++){
+            if($classificacao->grupo->Único[$i]==$key){
+              $control=$i;
+            }
+          }
+          $tabela[$control+1] = $value;
           #$tabela[$i] = $value;
           $i++;
 
         }
-
+        
        return json_encode($tabela);
 
       }
