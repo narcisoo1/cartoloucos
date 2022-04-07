@@ -76,6 +76,13 @@
                     <span>Conta</span></a>
             </li>
 
+            <!-- Nav Item - Estatistica Times -->
+            <li class="nav-item">
+                <a class="nav-link" href="statsteams.php">
+                    <i class="fas fa-inbox"></i>
+                    <span>Estatísticas Times</span></a>
+            </li>
+
             <!-- Nav Item - Usuários -->
             <li class="nav-item active">
                 <a class="nav-link" href="usuarios.php">

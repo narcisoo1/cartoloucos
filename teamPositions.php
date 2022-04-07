@@ -87,7 +87,7 @@ $classificacao = json_decode(classificacao(true),true);
                             <a class="btn btn-dark border-width-2 d-lg-inline-block">'.$_SESSION["nome_usuario"].'</a>
                             <ul class="dropdown">
                               <li><a href="logout.php">Sair</a></li>
-                              <li><a href="#">Dashboard</a></li>
+                              <li><a href="dashboard/index.php">Dashboard</a></li>
                             </ul>
                           </li>';
                   }
@@ -137,7 +137,7 @@ $classificacao = json_decode(classificacao(true),true);
                     echo '
                     <tr>
                       <td>'.$i.'</td>
-                      <td><img src="'.json_decode(equipe(($classificacao[$i]['id'])),true)['brasao'].'" width="25px"/><strong class="text-white">'.json_decode(equipe(($classificacao[$i]['id'])),true)['nome-comum'].'</strong></td>
+                      <td><a href="dashboard/statsteams.php?id='.$classificacao[$i]['id'].'"><img src="'.json_decode(equipe(($classificacao[$i]['id'])),true)['brasao'].'" width="25px"/><strong class="text-white">'.json_decode(equipe(($classificacao[$i]['id'])),true)['nome-comum'].'</strong></a></td>
                       <td>'.$classificacao[$i]['v']['total'].'</td>
                       <td>'.$classificacao[$i]['e']['total'].'</td>
                       <td>'.$classificacao[$i]['d']['total'].'</td>
