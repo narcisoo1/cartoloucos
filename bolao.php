@@ -139,6 +139,7 @@ if($_SESSION["permissao"]==5){
           <?php
             $id_rodada=ultimaRodada()+1;
             $control=false;
+            $bloqdate=0;
             $p1=null;
             $p2=null;
             $query = "SELECT * FROM palpite where usuario_usr_id='$_SESSION[id_usuario]' and rodada=1";
@@ -157,6 +158,12 @@ if($_SESSION["permissao"]==5){
               if($control){
                 $p1=$row['j'.($i+1).'_t1'];
                 $p2=$row['j'.($i+1).'_t2'];
+              }
+              date_default_timezone_set('America/Sao_Paulo');
+              if(date("Y-m-d") <= $rodada[$id_partida]['data']){
+                if(date('H:m:s', strtotime('+1 hour', strtotime(date('H:m:s'))))>=$rodada[$id_partida]['horario']){
+                  $bloqdate=1;
+                }
               }
               echo "
             <div class='col-lg-6 mb-4'>
@@ -198,7 +205,7 @@ if($_SESSION["permissao"]==5){
             ?>
         <div class="col-12 text-right">
           <div class="custom-nav">
-            <button type="button" name="submitserase" class="btn btn-primary btn-sm submitserase">Enviar</button>
+            <button type="button" name="submitserase" class="btn btn-primary btn-sm submitserase"<?php if($bloqdate==1){echo "disabled";}else{echo "enabled";}?>>Enviar</button>
             <button type="button" name="reset" class="btn btn-primary btn-sm reset">Cancelar</button>
           </div>
         </div>                    
@@ -282,24 +289,30 @@ if($_SESSION["permissao"]==5){
     }
 
     $(document).on('click', '.submitserase', function(){
-      var my_array = new Array();
-      var control = 1;
-      var rodada = document.getElementById('numrodada').name;
-      for(var i=0;i<10;i++){
-        my_array[i+'_1'] = document.getElementById(i+'_1').value;
-        my_array[i+'_2'] = document.getElementById(i+'_2').value;
-      }
-      for(var i=0;i<0;i++){
-        if(my_array[i+'_1']=='' || my_array[i+'_2']==''){
-          alert("Preencha todos os campos! (Jogo "+(i+1)+" com placar vazio)");
-          control=2;
-          break;
+      var controldate=<?php echo $bloqdate ?>;
+      if (controldate==1){
+        alert("Opa, rodada em andamento, palpites DESATIVADOS!!");
+      }else{
+        var my_array = new Array();
+        var control = 1;
+        var rodada = document.getElementById('numrodada').name;
+        for(var i=0;i<10;i++){
+          my_array[i+'_1'] = document.getElementById(i+'_1').value;
+          my_array[i+'_2'] = document.getElementById(i+'_2').value;
+        }
+        for(var i=0;i<0;i++){
+          if(my_array[i+'_1']=='' || my_array[i+'_2']==''){
+            alert("Preencha todos os campos! (Jogo "+(i+1)+" com placar vazio)");
+            control=2;
+            break;
+          }
+        }
+        if(control==1){
+          var userID = "<?php echo $_SESSION['id_usuario'] ?>";
+          submitbolao(userID,my_array, rodada);
         }
       }
-      if(control==1){
-        var userID = "<?php echo $_SESSION['id_usuario'] ?>";
-        submitbolao(userID,my_array, rodada);
-      }
+      
       //alert(my_array['0_1']);
       /*
       var form_values = $('form').serialize();
