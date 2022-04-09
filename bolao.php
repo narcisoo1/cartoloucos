@@ -160,8 +160,10 @@ if($_SESSION["permissao"]==5){
                 $p2=$row['j'.($i+1).'_t2'];
               }
               date_default_timezone_set('America/Sao_Paulo');
-              if(date("Y-m-d") <= $rodada[$id_partida]['data']){
-                if(date('H:m:s', strtotime('+1 hour', strtotime(date('H:m:s'))))>=$rodada[$id_partida]['horario']){
+              if(date("Y-m-d") >= $rodada[$id_partida]['data']){
+                #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
+                if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
+                  #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
                   $bloqdate=1;
                 }
               }

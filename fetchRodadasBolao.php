@@ -31,6 +31,7 @@ if(isset($_POST["post_id"]))
    $if_next_disable = 'disabled';
    $data_2=null;
   }
+    $bloqdate=0;
     $const = 123754;
     $id_rodada=$_POST["post_id"];
     $data = json_decode($json);
