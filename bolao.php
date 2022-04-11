@@ -137,7 +137,7 @@ if($_SESSION["permissao"]==5){
         
         <div class="row">
           <?php
-            $id_rodada=ultimaRodada()+1;
+            $id_rodada=1;
             $control=false;
             $bloqdate=0;
             $p1=null;
@@ -161,10 +161,14 @@ if($_SESSION["permissao"]==5){
               }
               date_default_timezone_set('America/Sao_Paulo');
               if(date("Y-m-d") >= $rodada[$id_partida]['data']){
-                #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
-                if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
-                  #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
+                if(date("Y-m-d") > $rodada[$id_partida]['data']){
+                  #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
                   $bloqdate=1;
+                }else{
+                  if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
+                    #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
+                    $bloqdate=1;
+                  }
                 }
               }
               echo "
@@ -210,6 +214,7 @@ if($_SESSION["permissao"]==5){
             <button type="button" name="submitserase" class="btn btn-primary btn-sm submitserase"<?php if($bloqdate==1){echo "disabled";}else{echo "enabled";}?>>Enviar</button>
             <button type="button" name="reset" class="btn btn-primary btn-sm reset">Cancelar</button>
           </div>
+          <input type='text' id='teste' name=<?php echo '"'.$bloqdate.'"'; ?> style='display:none;'/>
         </div>                    
       </div>
       </div>
@@ -291,7 +296,7 @@ if($_SESSION["permissao"]==5){
     }
 
     $(document).on('click', '.submitserase', function(){
-      var controldate=<?php echo $bloqdate ?>;
+      var controldate= document.getElementById('teste').name;
       if (controldate==1){
         alert("Opa, rodada em andamento, palpites DESATIVADOS!!");
       }else{

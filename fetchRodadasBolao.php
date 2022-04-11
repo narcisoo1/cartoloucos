@@ -6,6 +6,7 @@ $conn =  $db->getConnstring();
 
 if(isset($_POST["post_id"]))
 {
+ $bloqdate=0;
  $control=false;
  $p1=null;
  $p2=null;
@@ -21,7 +22,7 @@ if(isset($_POST["post_id"]))
  $if_previous_disable='';
  $if_next_disable='';
  $output = '';
-  if($_POST["post_id"]==(ultimaRodada()+1))
+  if($_POST["post_id"]==(1))
   {
    $if_previous_disable = 'disabled';
    $data_1=null;
@@ -31,12 +32,14 @@ if(isset($_POST["post_id"]))
    $if_next_disable = 'disabled';
    $data_2=null;
   }
-    $bloqdate=0;
+    
     $const = 123754;
     $id_rodada=$_POST["post_id"];
     $data = json_decode($json);
     $rodada = json_decode(rodada($id_rodada),true);
     $id_partida = 123754+(($id_rodada-1)*10);
+    
+
     $output .= '<div class="col-6 title-section">
         <h2 class="heading">Rodada '.$_POST["post_id"].'</h2>
         <input type="text" id="numrodada" name="'.$_POST["post_id"].'" style="display:none;"/>
@@ -55,6 +58,18 @@ if(isset($_POST["post_id"]))
         if($control){
             $p1=$row['j'.($i+1).'_t1'];
             $p2=$row['j'.($i+1).'_t2'];
+        }
+        date_default_timezone_set('America/Sao_Paulo');
+        if(date("Y-m-d") >= $rodada[$id_partida]['data']){
+            if(date("Y-m-d") > $rodada[$id_partida]['data']){
+                #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
+                $bloqdate=1;
+            }else{
+                if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
+                #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
+                $bloqdate=1;
+                }
+            }
         }
     $output .= "
     <div class='col-lg-6 mb-4'>
@@ -93,13 +108,27 @@ if(isset($_POST["post_id"]))
     ";
     $id_partida++;
     }
-    $output .= "
+    if($bloqdate==0){
+        $output .= "
+        <div class='col-12 text-right'>
+            <div class='custom-nav'>
+                <button type='button' name='submitserase' class='btn btn-primary btn-sm submitserase'>Enviar</button>
+                <button type='button' name='resetserase' class='btn btn-primary btn-sm resetserase'>Cancelar</button>
+            </div>
+            <input type='text' id='teste' name='".$bloqdate."' style='display:none;'/>   
+        </div>";
+    }
+    else{
+        $output .= "
     <div class='col-12 text-right'>
         <div class='custom-nav'>
-            <button type='button' name='submitserase' class='btn btn-primary btn-sm submitserase'>Enviar</button>
+            <button type='button' name='submitserase' class='btn btn-primary btn-sm submitserase' disabled>Enviar</button>
             <button type='button' name='resetserase' class='btn btn-primary btn-sm resetserase'>Cancelar</button>
         </div>
+        <input type='text' id='teste' name='".$bloqdate."' style='display:none;'/>   
     </div>";
+    }
+    
  echo $output;
 }
 
