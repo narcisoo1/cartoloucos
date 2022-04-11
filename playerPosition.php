@@ -88,7 +88,7 @@ $conn =  $db->getConnstring();
                             <a class="btn btn-dark border-width-2 d-lg-inline-block">'.$_SESSION["nome_usuario"].'</a>
                             <ul class="dropdown">
                               <li><a href="logout.php">Sair</a></li>
-                              <li><a href="#">Dashboard</a></li>
+                              <li><a href="dashboard/index.php">Dashboard</a></li>
                             </ul>
                           </li>';
                   }
