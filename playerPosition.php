@@ -202,10 +202,11 @@ $conn =  $db->getConnstring();
                       }
                     }
 
-                    for($i=0;$i<count($participantes);$i++){
+                    $p=1;
+                    for($i=count($participantes)-1;$i>=0;$i--){
                       echo '
                         <tr>
-                          <td>'.$i.'</td>
+                          <td>'.$p.'</td>
                           <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
                           <td>'.$participantes[$i]['t'].'</td>
                           <td>'.$participantes[$i]['p'].'</td>
@@ -213,6 +214,7 @@ $conn =  $db->getConnstring();
                           <td>'.$participantes[$i]['pontos'].'</td>
                         </tr>
                       ';
+                      $p++;
                     }
 
                   ?>
@@ -304,10 +306,11 @@ $conn =  $db->getConnstring();
                       }
                     }
 
-                    for($i=0;$i<count($participantes);$i++){
+                    $p=1;
+                    for($i=count($participantes)-1;$i>=0;$i--){
                       echo '
                         <tr>
-                          <td>'.$i.'</td>
+                          <td>'.$p.'</td>
                           <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
                           <td>'.$participantes[$i]['t'].'</td>
                           <td>'.$participantes[$i]['p'].'</td>
@@ -315,6 +318,7 @@ $conn =  $db->getConnstring();
                           <td>'.$participantes[$i]['pontos'].'</td>
                         </tr>
                       ';
+                      $p++;
                     }
 
                   ?>
