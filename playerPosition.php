@@ -163,7 +163,7 @@ $conn =  $db->getConnstring();
                     for($i=0;$i<count($participantes);$i++){
                       for($j=0;$j<count($participantes)-1;$j++){
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
-                          if($participantes[$j+1]['t']>=$participantes[$j]['t']){
+                          if($participantes[$j+1]['t']<=$participantes[$j]['t']){
                             $aux=$participantes[$j];
                             $participantes[$j]=$participantes[$j+1];
                             $participantes[$j+1]=$aux;
@@ -176,7 +176,7 @@ $conn =  $db->getConnstring();
                       for($j=0;$j<count($participantes)-1;$j++){
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
                           if($participantes[$j+1]['t']==$participantes[$j]['t']){
-                            if($participantes[$j+1]['p']>=$participantes[$j]['p']){
+                            if($participantes[$j+1]['p']<=$participantes[$j]['p']){
                               $aux=$participantes[$j];
                               $participantes[$j]=$participantes[$j+1];
                               $participantes[$j+1]=$aux;
@@ -191,7 +191,7 @@ $conn =  $db->getConnstring();
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
                           if($participantes[$j+1]['t']==$participantes[$j]['t']){
                             if($participantes[$j+1]['p']==$participantes[$j]['p']){
-                              if($participantes[$j+1]['e']<=$participantes[$j]['e']){
+                              if($participantes[$j+1]['e']>=$participantes[$j]['e']){
                                 $aux=$participantes[$j];
                                 $participantes[$j]=$participantes[$j+1];
                                 $participantes[$j+1]=$aux;
@@ -267,7 +267,7 @@ $conn =  $db->getConnstring();
                     for($i=0;$i<count($participantes);$i++){
                       for($j=0;$j<count($participantes)-1;$j++){
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
-                          if($participantes[$j+1]['t']>=$participantes[$j]['t']){
+                          if($participantes[$j+1]['t']<=$participantes[$j]['t']){
                             $aux=$participantes[$j];
                             $participantes[$j]=$participantes[$j+1];
                             $participantes[$j+1]=$aux;
@@ -280,7 +280,7 @@ $conn =  $db->getConnstring();
                       for($j=0;$j<count($participantes)-1;$j++){
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
                           if($participantes[$j+1]['t']==$participantes[$j]['t']){
-                            if($participantes[$j+1]['p']>=$participantes[$j]['p']){
+                            if($participantes[$j+1]['p']<=$participantes[$j]['p']){
                               $aux=$participantes[$j];
                               $participantes[$j]=$participantes[$j+1];
                               $participantes[$j+1]=$aux;
@@ -295,7 +295,7 @@ $conn =  $db->getConnstring();
                         if($participantes[$j+1]['pontos']==$participantes[$j]['pontos']){
                           if($participantes[$j+1]['t']==$participantes[$j]['t']){
                             if($participantes[$j+1]['p']==$participantes[$j]['p']){
-                              if($participantes[$j+1]['e']<=$participantes[$j]['e']){
+                              if($participantes[$j+1]['e']>=$participantes[$j]['e']){
                                 $aux=$participantes[$j];
                                 $participantes[$j]=$participantes[$j+1];
                                 $participantes[$j+1]=$aux;
