@@ -5,6 +5,10 @@ if(!isset($_SESSION["username"]) || !isset($_SESSION["id_usuario"])){
     header("Location: ../login.php");
 exit;
 }
+
+$array['usr_id']=$_SESSION['id_usuario'];
+$array['usr_nomeFull']=$_SESSION['nome_usuarioFull'];
+$array1=pontosGerais($array);
 ?>
 
 <!DOCTYPE html>
@@ -284,7 +288,7 @@ exit;
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
                                                         <?php
                                                             $porcentagem=ultimaRodada()/38*100;
-                                                            echo $porcentagem."%";                                                    
+                                                            echo (round($porcentagem, 2))."%";                                                    
                                                         ?>
                                                     </div>
                                                 </div>
@@ -540,7 +544,47 @@ exit;
             }
         });
     </script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script>
+
+        <?php 
+                    
+        ?>
+
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        // Pie Chart Geração
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Totais", "Parciais", "Erros"],
+            datasets: [{
+            data: [<?php echo ($array1['t']); ?>, <?php  echo ($array1['p']); ?>, <?php echo ($array1['e']); ?>],
+            backgroundColor: ['#36b9cc', '#1cc88a', '#e74a3b'],
+            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            },
+            legend: {
+            display: false
+            },
+            cutoutPercentage: 80,
+        },
+        });
+    </script>
 
 </body>
 
