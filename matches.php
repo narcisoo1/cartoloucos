@@ -121,28 +121,17 @@ include 'api/api.php';
         <div class="col-lg-12">
           
           <div class="d-flex team-vs">
-            <span class="score">4-3</span>
+            <span class="score">2-0</span>
             <div class="team-1 w-50">
               <div class="team-details w-100 text-center">
-                <img src="http://e.imguol.com/futebol/brasoes/100x100/gremio.png" alt="Image" class="img-fluid">
-                <h3>Grêmio <span>(win)</span></h3>
-                <ul class="list-unstyled">
-                  <li>Diego Souza (7)(20)</li>
-                  <li>Jaminton Campaz (11)</li>
-                  <li>Douglas Costa (59)</li>
-                  <li></li>
-                </ul>
+                <img src="http://e.imguol.com/futebol/brasoes/100x100/atletico-mg.png" alt="Image" class="img-fluid">
+                <h3>Atlético-MG <span>(win)</span></h3>
               </div>
             </div>
             <div class="team-2 w-50">
               <div class="team-details w-100 text-center">
-                <img src="http://e.imguol.com/futebol/brasoes/100x100/atletico-mg.png" alt="Image" class="img-fluid">
-                <h3>Atlético-MG <span>(loss)</span></h3>
-                <ul class="list-unstyled">
-                  <li>Dodô (26)</li>
-                  <li>Vargas (35)</li>
-                  <li>Hyoran (90+1)</li>
-                </ul>
+                <img src="http://e.imguol.com/futebol/brasoes/100x100/internacional.png" alt="Image" class="img-fluid">
+                <h3>Internacional <span>(loss)</span></h3>
               </div>
             </div>
           </div>
@@ -165,15 +154,15 @@ include 'api/api.php';
                 <div class="widget-vs">
                   <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
                     <div class="team-1 text-center">
-                      <img src="http://e.imguol.com/futebol/brasoes/100x100/atletico-mg.png" alt="Image">
-                      <h3>Atlético-MG</h3>
+                      <img src="http://e.imguol.com/futebol/brasoes/100x100/flamengo.png" alt="Image">
+                      <h3>Flamengo</h3>
                     </div>
                     <div>
                       <span class="vs"><span>VS</span></span>
                     </div>
                     <div class="team-2 text-center">
-                      <img src="http://e.imguol.com/futebol/brasoes/100x100/internacional.png" alt="Image">
-                      <h3>Internacional</h3>
+                      <img src="http://e.imguol.com/futebol/brasoes/100x100/sao-paulo.png" alt="Image">
+                      <h3>São Paulo</h3>
                     </div>
                   </div>
                 </div>
@@ -182,9 +171,9 @@ include 'api/api.php';
               <div class="text-center widget-vs-contents mb-4">
                 <h4>Brasileirão Série A</h4>
                 <p class="mb-5">
-                  <span class="d-block">Abril 10th, 2022</span>
-                  <span class="d-block">16:30</span>
-                  <strong class="text-primary">A definir</strong>
+                  <span class="d-block">Abril 17th, 2022</span>
+                  <span class="d-block">16:00</span>
+                  <strong class="text-primary">Maracanã</strong>
                 </p>
 
                 <div id="date-countdown2" class="pb-1"></div>
