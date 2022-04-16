@@ -65,7 +65,7 @@ if(isset($_POST["post_id"]))
                 #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
                 $bloqdate=1;
             }else{
-                if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
+                if(date('H:m', strtotime('-1 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
                 #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
                 $bloqdate=1;
                 }
