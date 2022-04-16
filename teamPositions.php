@@ -125,10 +125,11 @@ $classificacao = json_decode(classificacao(true),true);
                   <tr>
                     <th>P</th>
                     <th>Team</th>
+                    <th>PTS</th>
                     <th>V</th>
                     <th>E</th>
                     <th>D</th>
-                    <th>PTS</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -138,10 +139,10 @@ $classificacao = json_decode(classificacao(true),true);
                     <tr>
                       <td>'.$i.'</td>
                       <td><a href="dashboard/statsteams.php?id='.$classificacao[$i]['id'].'"><img src="'.json_decode(equipe(($classificacao[$i]['id'])),true)['brasao'].'" width="25px"/><strong class="text-white">'.json_decode(equipe(($classificacao[$i]['id'])),true)['nome-comum'].'</strong></a></td>
+                      <td><strong class="text-white">'.$classificacao[$i]['pg']['total'].'</strong></td>
                       <td>'.$classificacao[$i]['v']['total'].'</td>
                       <td>'.$classificacao[$i]['e']['total'].'</td>
                       <td>'.$classificacao[$i]['d']['total'].'</td>
-                      <td>'.$classificacao[$i]['pg']['total'].'</td>
                     </tr>';
                   }
                  

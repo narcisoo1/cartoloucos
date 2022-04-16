@@ -128,10 +128,11 @@ $conn =  $db->getConnstring();
                   <tr>
                     <th>P</th>
                     <th>Competidor</th>
+                    <th>PTS</th>
                     <th>Acertos</th>
                     <th>Parcial</th>
                     <th>Erros</th>
-                    <th>PTS</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -208,10 +209,10 @@ $conn =  $db->getConnstring();
                         <tr>
                           <td>'.$p.'</td>
                           <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
+                          <td><strong class="text-white">'.$participantes[$i]['pontos'].'</strong></td>
                           <td>'.$participantes[$i]['t'].'</td>
                           <td>'.$participantes[$i]['p'].'</td>
                           <td>'.$participantes[$i]['e'].'</td>
-                          <td>'.$participantes[$i]['pontos'].'</td>
                         </tr>
                       ';
                       $p++;
@@ -231,10 +232,11 @@ $conn =  $db->getConnstring();
                   <tr>
                     <th>P</th>
                     <th>Competidor</th>
+                    <th>PTS</th>
                     <th>Acertos</th>
                     <th>Parcial</th>
                     <th>Erros</th>
-                    <th>PTS</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -312,10 +314,10 @@ $conn =  $db->getConnstring();
                         <tr>
                           <td>'.$p.'</td>
                           <td><strong class="text-white">'.$participantes[$i]['usr_nomeFull'].'</strong></td>
+                          <td><strong class="text-white">'.$participantes[$i]['pontos'].'</strong></td>
                           <td>'.$participantes[$i]['t'].'</td>
                           <td>'.$participantes[$i]['p'].'</td>
                           <td>'.$participantes[$i]['e'].'</td>
-                          <td>'.$participantes[$i]['pontos'].'</td>
                         </tr>
                       ';
                       $p++;
