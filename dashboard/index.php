@@ -453,12 +453,17 @@ $array1=pontosGerais($array);
     <script> 
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
-
+        var ultima = <?php echo ultimaRodada(); ?>;
+        var teste=[];
+        for (var i = 1; i <= ultima; i++) {
+            teste.push(i);
+        }
+        
         var ctx = document.getElementById("myAreaChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38"],
+                labels: teste,
                 datasets: [{
                 label: "Pontos",
                 lineTension: 0.3,
@@ -544,6 +549,8 @@ $array1=pontosGerais($array);
             }
         });
     </script>
+    
+    
     <script>
 
         <?php 

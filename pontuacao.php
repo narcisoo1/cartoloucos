@@ -58,6 +58,7 @@ function pontosAnual($id){
 }
 
 function pontosGerais($array1){
+    $ultima=ultimaRodada();
     $array=array();
     $array['usr_id']=$array1['usr_id'];
     $array['usr_nomeFull']=$array1['usr_nomeFull'];
@@ -67,7 +68,7 @@ function pontosGerais($array1){
     $array['e']=0;
     $control=false;
     global $connect;
-    $query = "SELECT * FROM palpite WHERE usuario_usr_id = '$array1[usr_id]'";
+    $query = "SELECT * FROM palpite WHERE usuario_usr_id = '$array1[usr_id]' and rodada<='$ultima'";
     $result = mysqli_query($connect, $query);
     $qtd = mysqli_num_rows($result);
     if ($result->num_rows > 0) {
