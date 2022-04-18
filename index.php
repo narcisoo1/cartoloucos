@@ -122,21 +122,22 @@ $classificacao = json_decode(classificacao(true),true);
     
     
     <div class="container">
+      <?php $ultimapartida=json_decode(ultimoJogo(),true);?>
       <div class="row">
         <div class="col-lg-12">
           
           <div class="d-flex team-vs">
-            <span class="score">2-0</span>
+            <span class="score"><?php print_r ($ultimapartida['placar1'].'-'.$ultimapartida['placar2']);?></span>
             <div class="team-1 w-50">
               <div class="team-details w-100 text-center">
-                <img src="http://e.imguol.com/futebol/brasoes/100x100/atletico-mg.png" alt="Image" class="img-fluid">
-                <h3>Atlético-MG <span>(loss)</span></h3>
+                <img src=<?php echo (str_replace('4', '10', json_decode(equipe($ultimapartida['time1']),true)['brasao']))?> alt="Image" class="img-fluid">
+                <h3><?php echo (json_decode(equipe($ultimapartida['time1']),true)['nome-comum']); ?></h3>
               </div>
             </div>
             <div class="team-2 w-50">
               <div class="team-details w-100 text-center">
-                <img src="http://e.imguol.com/futebol/brasoes/100x100/internacional.png" alt="Image" class="img-fluid">
-                <h3>Internacional <span>(loss)</span></h3>
+                <img src=<?php echo (str_replace('4', '10', json_decode(equipe($ultimapartida['time2']),true)['brasao']))?> alt="Image" class="img-fluid">
+                <h3><?php echo (json_decode(equipe($ultimapartida['time2']),true)['nome-comum']); ?> </h3>
                 
               </div>
             </div>

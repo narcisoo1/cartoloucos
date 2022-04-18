@@ -17,7 +17,6 @@
       #echo classificacao(true);
       
 
-
     // retorna dados da equipe
     function equipe($id_time){
 
@@ -64,6 +63,7 @@
 
     }
 
+    // retorna o inteiro da ultima rodada
     function ultimaRodada(){
       global $data;
       $obj = $data;
@@ -121,6 +121,40 @@
 
     }
 
+    function ultimoJogo(){
+      $rodada=ultimaRodada();
+      if(!isset($rodada)){
+        return json_encode(array('erro' => '401', 'msg' => 'rodada is required'));
+      }
+      global $data;
+      $obj = $data;
+      $rodada = $rodada;
+      $control = 0;
+      $ultimoJogo = null;
 
+      foreach ($obj->fases as $key => $value) {
+        $jogos = $value->jogos;
+
+        $jogo = array();
+
+        foreach ($jogos->rodada->$rodada as $key => $value) {
+          $idjogo = $value;
+          $jogo[$idjogo] = $jogos->id->$idjogo;
+          if ($control==0){
+            $ultimoJogo=$jogo[$idjogo];
+          }else{
+            if($jogo[$idjogo]['data']>=$ultimoJogo['data']){
+              if($jogo[$idjogo]['horario']>$ultimoJogo['horario']){
+                $ultimoJogo=$jogo[$idjogo];
+              }
+            }
+          }
+          
+        }
+        
+        return json_encode($ultimoJogo);
+
+      }
+    }
 
 ?>
