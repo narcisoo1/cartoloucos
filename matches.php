@@ -34,6 +34,7 @@ include 'api/api.php';
   <link rel="stylesheet" href="css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -87,7 +88,7 @@ include 'api/api.php';
                             <a class="btn btn-dark border-width-2 d-lg-inline-block">'.$_SESSION["nome_usuario"].'</a>
                             <ul class="dropdown">
                               <li><a href="logout.php">Sair</a></li>
-                              <li><a href="#">Dashboard</a></li>
+                              <li><a href="dashboard/index.php">Dashboard</a></li>
                             </ul>
                           </li>';
                   }

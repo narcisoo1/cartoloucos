@@ -29,7 +29,7 @@ exit;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -320,12 +320,6 @@ exit;
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

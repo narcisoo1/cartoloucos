@@ -9,8 +9,13 @@ if(isset($_POST["post_id"])){
         if($conn -> query($query) === TRUE){
             $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Usuário Bloqueado!');
-                    window.location.href="usuarios.php";
+                    swal({
+                        title: "Boa!",
+                        text: "Usuário Bloqueado!",
+                        icon: "success"
+                    }).then(function() {
+                        window.location = "usuarios.php";
+                    });
                 </script>
             EOT;
             echo $script;
@@ -18,8 +23,13 @@ if(isset($_POST["post_id"])){
         }else{
             $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Erro ao Bloquear Usuário!');
-                    window.location.href="usuarios.php";
+                    swal({
+                        title: "Opa!",
+                        text: "Erro ao Bloquear Usuário!",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "usuarios.php";
+                    });
                 </script>
             EOT;
             echo $script;
@@ -31,8 +41,13 @@ if(isset($_POST["post_id"])){
             if($conn -> query($query) === TRUE){
                 $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Usuário Desbloqueado!');
-                        window.location.href="usuarios.php";
+                        swal({
+                            title: "Boa!",
+                            text: "Usuário Bloqueado!",
+                            icon: "success"
+                        }).then(function() {
+                            window.location = "usuarios.php";
+                        });
                     </script>
                 EOT;
                 echo $script;
@@ -40,8 +55,13 @@ if(isset($_POST["post_id"])){
             }else{
                 $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Erro ao Desbloquear Usuário!');
-                        window.location.href="usuarios.php";
+                        swal({
+                            title: "Ops!",
+                            text: "Erro ao Desbloquear Usuário!",
+                            icon: "error"
+                        }).then(function() {
+                            window.location = "usuarios.php";
+                        });
                     </script>
                 EOT;
                 echo $script;
@@ -54,8 +74,13 @@ if(isset($_POST["post_id"])){
                 if($conn -> query($query) === TRUE){
                     $script = <<<EOT
                         <script type="text/javascript">
-                            alert('Senha Reestabelecida!');
-                            window.location.href="usuarios.php";
+                            swal({
+                                title: "Redefinida!",
+                                text: "Senha Atualizada!",
+                                icon: "success"
+                            }).then(function() {
+                                window.location = "usuarios.php";
+                            });
                         </script>
                     EOT;
                     echo $script;
@@ -63,8 +88,13 @@ if(isset($_POST["post_id"])){
                 }else{
                     $script = <<<EOT
                         <script type="text/javascript">
-                            alert('Erro ao Reestabelecer Senha!');
-                            window.location.href="usuarios.php";
+                            swal({
+                                title: "Ops!",
+                                text: "Erro ao Reestabelecer Senha!",
+                                icon: "error"
+                            }).then(function() {
+                                window.location = "usuarios.php";
+                            });
                         </script>
                     EOT;
                     echo $script;
@@ -76,8 +106,13 @@ if(isset($_POST["post_id"])){
                     if($conn -> query($query) === TRUE){
                         $script = <<<EOT
                             <script type="text/javascript">
-                                alert('Admin Ativado!');
-                                window.location.href="usuarios.php";
+                                swal({
+                                    title: "Feito!",
+                                    text: "Admin Ativado!",
+                                    icon: "success"
+                                }).then(function() {
+                                    window.location = "usuarios.php";
+                                });
                             </script>
                         EOT;
                         echo $script;
@@ -85,8 +120,13 @@ if(isset($_POST["post_id"])){
                     }else{
                         $script = <<<EOT
                             <script type="text/javascript">
-                                alert('Erro ao Ativar Administrador!');
-                                window.location.href="usuarios.php";
+                                swal({
+                                    title: "Ops!",
+                                    text: "Erro ao Ativar Administrador!",
+                                    icon: "error"
+                                }).then(function() {
+                                    window.location = "usuarios.php";
+                                });
                             </script>
                         EOT;
                         echo $script;
@@ -98,8 +138,13 @@ if(isset($_POST["post_id"])){
                         if($conn -> query($query) === TRUE){
                             $script = <<<EOT
                                 <script type="text/javascript">
-                                    alert('Admin Desativado!');
-                                    window.location.href="usuarios.php";
+                                    swal({
+                                        title: "Boa!",
+                                        text: "Admin Desativado!",
+                                        icon: "success"
+                                    }).then(function() {
+                                        window.location = "usuarios.php";
+                                    });
                                 </script>
                             EOT;
                             echo $script;
@@ -107,8 +152,13 @@ if(isset($_POST["post_id"])){
                         }else{
                             $script = <<<EOT
                                 <script type="text/javascript">
-                                    alert('Erro ao Desativar Administrador!');
-                                    window.location.href="usuarios.php";
+                                    swal({
+                                        title: "Ops!",
+                                        text: "Erro ao Desativar Administrador!",
+                                        icon: "error"
+                                    }).then(function() {
+                                        window.location = "usuarios.php";
+                                    });
                                 </script>
                             EOT;
                             echo $script;

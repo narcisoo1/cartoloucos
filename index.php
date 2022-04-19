@@ -33,6 +33,7 @@ $classificacao = json_decode(classificacao(true),true);
 
   <link rel="stylesheet" href="css/style.css">
 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>

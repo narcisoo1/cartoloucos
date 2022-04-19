@@ -1,3 +1,6 @@
+<html>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</html>
 <?php
 include '../conecta.php';
 include('../pontuacao.php');
@@ -13,8 +16,13 @@ $conn =  $connect;
         if($username == "" || $username == null || $nomeFull == "" || $nomeFull == null){
             $script = <<<EOT
             <script type="text/javascript">
-                alert('Todos os dados devem ser preenchidos!');
-                window.location.href="conta.php";
+                swal({
+                    title: "Vazio!",
+                    text: "Todos os dados devem ser preenchidos!",
+                    icon: "error"
+                }).then(function() {
+                    window.location = "conta.php";
+                });
             </script>
             EOT;
             echo $script;
@@ -28,8 +36,13 @@ $conn =  $connect;
 				$_SESSION["nome_usuarioFull"] = $nomeFull;
                 $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Dados atualizados!');
-                    window.location.href="conta.php";
+                    swal({
+                        title: "Boa!",
+                        text: "Dados atualizados!",
+                        icon: "success"
+                    }).then(function() {
+                        window.location = "conta.php";
+                    });
                 </script>
                 EOT;
                 echo $script;
@@ -37,8 +50,13 @@ $conn =  $connect;
             }else{
                 $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Erro ao atualizar seus dados!');
-                    window.location.href="conta.php";
+                    swal({
+                        title: "Vazio!",
+                        text: "Todos os dados devem ser preenchidos!",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "conta.php";
+                    });
                 </script>
                 EOT;
                 echo $script;
@@ -53,8 +71,13 @@ $conn =  $connect;
         if($lastsenha == "" || $lastsenha == null || $senha == "" || $senha == null || $senha1 == "" || $senha1 == null){
             $script = <<<EOT
             <script type="text/javascript">
-                alert('Todos os dados devem ser preenchidos!');
-                window.location.href="conta.php";
+                swal({
+                    title: "Opa!",
+                    text: "Todos os campos devem ser preenchidos!",
+                    icon: "error"
+                }).then(function() {
+                    window.location = "conta.php";
+                });
             </script>
             EOT;
             echo $script;
@@ -71,8 +94,13 @@ $conn =  $connect;
                     if($resultupdate){
                         $script = <<<EOT
                         <script type="text/javascript">
-                            alert('Senha atualizada!');
-                            window.location.href="conta.php";
+                            swal({
+                                title: "Boa!",
+                                text: "Senha atualizada!",
+                                icon: "success"
+                            }).then(function() {
+                                window.location = "conta.php";
+                            });
                         </script>
                         EOT;
                         echo $script;
@@ -80,8 +108,13 @@ $conn =  $connect;
                     }else{
                         $script = <<<EOT
                         <script type="text/javascript">
-                            alert('Falha ao atualizar senha!');
-                            window.location.href="conta.php";
+                            swal({
+                                title: "Opa!",
+                                text: "Falha ao atualizar senha!",
+                                icon: "error"
+                            }).then(function() {
+                                window.location = "conta.php";
+                            });
                         </script>
                         EOT;
                         echo $script;
@@ -90,8 +123,13 @@ $conn =  $connect;
                 }else{
                     $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Senha incorreta!');
-                        window.location.href="conta.php";
+                        swal({
+                            title: "Ops!",
+                            text: "Senha incorreta!",
+                            icon: "error"
+                        }).then(function() {
+                            window.location = "conta.php";
+                        });
                     </script>
                     EOT;
                     echo $script;
@@ -100,8 +138,13 @@ $conn =  $connect;
             }else{
                 $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Senha e confirmação de senha divergem!');
-                    window.location.href="conta.php";
+                    swal({
+                        title: "Diferentes!",
+                        text: "Senhas não conferem!",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "conta.php";
+                    });
                 </script>
                 EOT;
                 echo $script;

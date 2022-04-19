@@ -42,7 +42,7 @@ if(isset($_POST["idjogador"]))
                 if($insert){
                     $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Palpite realizado!');
+                        swal('Boa!','Palpite realizado!','success');
                         window.location.href="bolao.php";
                     </script>
                     EOT;
@@ -51,7 +51,7 @@ if(isset($_POST["idjogador"]))
                 }else{
                     $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Erro ao computar seus palpites!');
+                        swal('Opa!','Erro ao computar seus palpites!','error');
                         window.location.href="bolao.php";
                     </script>
                     EOT;

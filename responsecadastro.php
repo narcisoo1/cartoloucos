@@ -16,8 +16,13 @@ $connect = $conn;
     if($login == "" || $login == null || $nome == "" || $nome == null || $senha == "" || $senha == null || $senha1 == "" || $senha1 == null){
         $script = <<<EOT
         <script type="text/javascript">
-            alert('Todos os campos devem ser preenchidos!');
-            window.location.href="cadastro.php";
+            swal({
+                title: "Ops!",
+                text: "Todos os campos devem ser preenchidos!",
+                icon: "error"
+            }).then(function() {
+                window.location = "cadastro.php";
+            });
         </script>
         EOT;
         echo $script;
@@ -29,8 +34,13 @@ $connect = $conn;
         if($array != null){
                 $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Nome de usuário já cadastrado!');
-                    window.location.href="cadastro.php";
+                    swal({
+                        title: "Duplicado!",
+                        text: "Usuário já cadastrado!",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "cadastro.php";
+                    });
                 </script>
                 EOT;
                 echo $script;
@@ -40,8 +50,13 @@ $connect = $conn;
             if($senha != $senha1){
                 $script = <<<EOT
                 <script type="text/javascript">
-                    alert('Senhas não conferem!');
-                    window.location.href="cadastro.php";
+                    swal({
+                        title: "Diferentes!",
+                        text: "Senhas não conferem!",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "cadastro.php";
+                    });
                 </script>
                 EOT;
                 echo $script;
@@ -53,8 +68,13 @@ $connect = $conn;
                 if($insert){
                     $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Cadastro realizado!');
-                        window.location.href="login.php";
+                        swal({
+                            title: "Boa!",
+                            text: "Cadastro realizado!",
+                            icon: "success"
+                        }).then(function() {
+                            window.location = "login.php";
+                        });
                     </script>
                     EOT;
                     echo $script;
@@ -62,8 +82,13 @@ $connect = $conn;
                 }else{
                     $script = <<<EOT
                     <script type="text/javascript">
-                        alert('Erro ao cadastrar seus dados!');
-                        window.location.href="cadastro.php";
+                        swal({
+                            title: "Ops!",
+                            text: "Erro ao cadastrar seus dados!",
+                            icon: "error"
+                        }).then(function() {
+                            window.location = "cadastro.php";
+                        });
                     </script>
                     EOT;
                     echo $script;

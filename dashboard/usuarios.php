@@ -31,6 +31,7 @@
         rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/d479375b41.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom styles for this template -->
@@ -71,7 +72,7 @@
             
             <!-- Nav Item - Conta -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="conta.php">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
                     <span>Conta</span></a>
             </li>

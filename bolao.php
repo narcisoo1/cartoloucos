@@ -44,6 +44,7 @@ if($_SESSION["permissao"]==5){
   <link rel="stylesheet" href="css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -93,7 +94,7 @@ if($_SESSION["permissao"]==5){
                             <a class="btn btn-dark border-width-2 d-lg-inline-block">'.$_SESSION["nome_usuario"].'</a>
                             <ul class="dropdown">
                               <li><a href="logout.php">Sair</a></li>
-                              <li><a href="#">Dashboard</a></li>
+                              <li><a href="dashboard/index.php">Dashboard</a></li>
                             </ul>
                           </li>';
                   }
@@ -165,7 +166,7 @@ if($_SESSION["permissao"]==5){
                   #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
                   $bloqdate=1;
                 }else{
-                  if(date('H:m', strtotime('+0 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
+                  if(date('H:m', strtotime('+1 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
                     #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
                     $bloqdate=1;
                   }
@@ -307,9 +308,9 @@ if($_SESSION["permissao"]==5){
           my_array[i+'_1'] = document.getElementById(i+'_1').value;
           my_array[i+'_2'] = document.getElementById(i+'_2').value;
         }
-        for(var i=0;i<0;i++){
+        for(var i=0;i<10;i++){
           if(my_array[i+'_1']=='' || my_array[i+'_2']==''){
-            alert("Preencha todos os campos! (Jogo "+(i+1)+" com placar vazio)");
+            swal("Opa!","Preencha todos os campos! (Jogo "+(i+1)+" com placar vazio)","error");
             control=2;
             break;
           }
