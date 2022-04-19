@@ -263,6 +263,7 @@ jQuery(document).ready(function($) {
 				
 	};
 	siteCountDown(datappartida);
+	
 	var siteCountDownBr = function(data) {
 		$('#date-countdown').countdown(data, function(event) {
 		  var $this = $(this).html(event.strftime(''
