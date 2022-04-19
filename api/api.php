@@ -13,9 +13,9 @@
       $json = file_get_contents("https://raw.githubusercontent.com/narcisoo1/cartoloucos/main/api/db_br.json");
 
       $data = $json_dados;
-    
-      #echo classificacao(true);
-      
+          
+
+    #print_r (proximojogo());
 
     // retorna dados da equipe
     function equipe($id_time){
@@ -157,4 +157,40 @@
       }
     }
 
+    function proximoJogo(){
+      date_default_timezone_set('America/Sao_Paulo');
+      $today = date("Y-m-d");
+
+      $rodada=ultimaRodada();
+      global $data;
+      $obj = $data;
+      $rodada = $rodada;
+      $control = 0;
+      $proximojogo = null;
+
+      foreach ($obj->fases as $key => $value) {
+        $jogos = $value->jogos;
+
+        $jogo = array();
+        foreach ($jogos->data as $key => $value) {
+          if($key>$today){
+              $idjogo=$jogos->data->$key[0];
+              if ($control==0){
+                $jogo=json_decode(json_encode($jogos->id->$idjogo), true);
+                $proximojogo=$jogo;
+                $control++;
+              }else{
+                if($jogo['data']>=$proximojogo['data']){
+                  if($jogo['horario']<$proximojogo['horario']){
+                    $proximojogo=$jogo;
+                  }
+                }
+              }
+            }
+        }
+        
+        return json_encode($proximojogo);
+
+      }
+    }
 ?>

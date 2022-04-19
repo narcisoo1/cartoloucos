@@ -107,7 +107,7 @@ $classificacao = json_decode(classificacao(true),true);
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-5 ml-auto">
-            <h1 class="text-white">Início do bolão Cartoloucos</h1>
+            <h1 class="text-white">Fim do bolão Cartoloucos</h1>
             <p>Seja bem vindo à família cartoloucos. Faça seu cadastro grátis e participe conosco desta brincadeira.</p>
             <div id="date-countdown"></div>
             <p>
@@ -148,8 +148,9 @@ $classificacao = json_decode(classificacao(true),true);
     
     <div class="site-section bg-dark">
       <div class="container">
+        <?php $proximapartida=json_decode(proximoJogo(),true);?>
         <div class="row">
-        <div class="col-lg-6">
+          <div class="col-lg-6">
             <div class="widget-next-match">
               <div class="widget-title">
                 <h3>Próxima Partida</h3>
@@ -158,15 +159,15 @@ $classificacao = json_decode(classificacao(true),true);
                 <div class="widget-vs">
                   <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
                     <div class="team-1 text-center">
-                      <img src="http://e.imguol.com/futebol/brasoes/60x60/flamengo.png" alt="Image">
-                      <h3>Flamengo</h3>
+                      <img src=<?php echo (str_replace('4', '6', json_decode(equipe($proximapartida['time1']),true)['brasao']))?> alt="Image">
+                      <h3><?php echo (json_decode(equipe($proximapartida['time1']),true)['nome-comum']); ?></h3>
                     </div>
                     <div>
                       <span class="vs"><span>VS</span></span>
                     </div>
                     <div class="team-2 text-center">
-                      <img src="http://e.imguol.com/futebol/brasoes/60x60/sao-paulo.png" alt="Image">
-                      <h3>São Paulo</h3>
+                      <img src=<?php echo (str_replace('4', '6', json_decode(equipe($proximapartida['time2']),true)['brasao']))?> alt="Image">
+                      <h3><?php echo (json_decode(equipe($proximapartida['time2']),true)['nome-comum']); ?></h3>
                     </div>
                   </div>
                 </div>
@@ -175,9 +176,9 @@ $classificacao = json_decode(classificacao(true),true);
               <div class="text-center widget-vs-contents mb-4">
                 <h4>Brasileirão Série A</h4>
                 <p class="mb-5">
-                  <span class="d-block">Abril 17th, 2022</span>
-                  <span class="d-block">16:00</span>
-                  <strong class="text-primary">Maracanã</strong>
+                  <span class="d-block"><?php echo date("d-m-Y",strtotime($proximapartida['data']));; ?></span>
+                  <span class="d-block"><?php echo $proximapartida['horario']; ?></span>
+                  <strong class="text-primary"><?php echo $proximapartida['estadio']; ?></strong>
                 </p>
 
                 <div id="date-countdown2" class="pb-1"></div>
@@ -348,8 +349,9 @@ $classificacao = json_decode(classificacao(true),true);
 
   </div>
   <!-- .site-wrap -->
-
+  
   <script src="js/jquery-3.3.1.min.js"></script>
+  
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/popper.min.js"></script>
@@ -364,9 +366,14 @@ $classificacao = json_decode(classificacao(true),true);
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
 
-
-  <script src="js/main.js"></script>
-
+  <script type="text/javascript">
+    var datappartida = <?php echo '"'.(str_replace('-', '/', $proximapartida['data'])).' '.(str_replace('h', ':', $proximapartida['horario'])).'"'; ?>;
+  </script>
+  <script src="js/main.js">siteCountDown('2022/08/05 00:00');</script>
+  <script type="text/javascript">
+    
+  </script>
+  
 </body>
 
 </html>
