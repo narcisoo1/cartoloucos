@@ -140,6 +140,7 @@ if($_SESSION["permissao"]==5){
           <?php
             $id_rodada=1;
             $control=false;
+            $countdate=0;
             $bloqdate=0;
             $p1=null;
             $p2=null;
@@ -156,6 +157,7 @@ if($_SESSION["permissao"]==5){
             $rodada = json_decode(rodada($id_rodada),true);
             $id_partida = 123754+(($id_rodada-1)*10);
             for($i = 0 ; $i < 10; $i++){
+              $teste="enabled";
               if($control){
                 $p1=$row['j'.($i+1).'_t1'];
                 $p2=$row['j'.($i+1).'_t2'];
@@ -165,10 +167,14 @@ if($_SESSION["permissao"]==5){
                 if(date("Y-m-d") > $rodada[$id_partida]['data']){
                   #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
                   $bloqdate=1;
+                  $teste="disabled";
+                  $countdate++;
                 }else{
                   if(date('H:m', strtotime('+1 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
                     #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
                     $bloqdate=1;
+                    $teste="disabled";
+                    $countdate++;
                   }
                 }
               }
@@ -182,7 +188,7 @@ if($_SESSION["permissao"]==5){
                       <div class='team-1 text-center'>
                         <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
-                        <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
+                        <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'".$teste."/>
                       </div>
                       <div>
                         <span class='vs'><span>VS</span></span>
@@ -190,7 +196,7 @@ if($_SESSION["permissao"]==5){
                       <div class='team-2 text-center'>
                         <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
-                        <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
+                        <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'".$teste."/>
                       </div>
                     </div>
                   </form>
@@ -212,7 +218,7 @@ if($_SESSION["permissao"]==5){
             ?>
         <div class="col-12 text-right">
           <div class="custom-nav">
-            <button type="button" name="submitserase" class="btn btn-primary btn-sm submitserase"<?php if($bloqdate==1){echo "disabled";}else{echo "enabled";}?>>Enviar</button>
+            <button type="button" name="submitserase" class="btn btn-primary btn-sm submitserase"<?php if($countdate==10){echo "disabled";}else{echo "enabled";}?>>Enviar</button>
             <button type="button" name="reset" class="btn btn-primary btn-sm reset">Cancelar</button>
           </div>
           <input type='text' id='teste' name=<?php echo '"'.$bloqdate.'"'; ?> style='display:none;'/>
@@ -298,7 +304,7 @@ if($_SESSION["permissao"]==5){
 
     $(document).on('click', '.submitserase', function(){
       var controldate= document.getElementById('teste').name;
-      if (controldate==1){
+      if (false){
         alert("Opa, rodada em andamento, palpites DESATIVADOS!!");
       }else{
         var my_array = new Array();
@@ -310,9 +316,8 @@ if($_SESSION["permissao"]==5){
         }
         for(var i=0;i<10;i++){
           if(my_array[i+'_1']=='' || my_array[i+'_2']==''){
-            swal("Opa!","Preencha todos os campos! (Jogo "+(i+1)+" com placar vazio)","error");
-            control=2;
-            break;
+            my_array[i+'_1']=-1;
+            my_array[i+'_2']=-1;
           }
         }
         if(control==1){

@@ -7,6 +7,7 @@ $conn =  $db->getConnstring();
 if(isset($_POST["post_id"]))
 {
  $bloqdate=0;
+ $countdate=0;
  $control=false;
  $p1=null;
  $p2=null;
@@ -55,6 +56,7 @@ if(isset($_POST["post_id"]))
     <div class="row">';
 
     for($i = 0 ; $i < 10; $i++){
+        $teste="enabled";
         if($control){
             $p1=$row['j'.($i+1).'_t1'];
             $p2=$row['j'.($i+1).'_t2'];
@@ -64,10 +66,14 @@ if(isset($_POST["post_id"]))
             if(date("Y-m-d") > $rodada[$id_partida]['data']){
                 #echo date("Y-m-d"). '>=' . $rodada[$id_partida]['data'];
                 $bloqdate=1;
+                $teste="disabled";
+                $countdate++;
             }else{
                 if(date('H:m', strtotime('+1 hour', strtotime(date('H:m:s'))))>=str_replace('h', ':', ($rodada[$id_partida]['horario']))){
                 #echo str_replace('h', ':', ($rodada[$id_partida]['horario'])).'>='.date('H:m', strtotime('+0 hour', strtotime(date('H:m:s')))).'<br>';
                 $bloqdate=1;
+                $teste="disabled";
+                $countdate++;
                 }
             }
         }
@@ -81,7 +87,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-1 text-center'>
                             <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
-                            <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'/>
+                            <input value='".$p1."' type='number' id='".$i."_1' style='width: 40px; text-align:center;'".$teste."/>
                         </div>
                         <div>
                             <span class='vs'><span>VS</span></span>
@@ -89,7 +95,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-2 text-center'>
                             <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
-                            <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'/>
+                            <input value='".$p2."' type='number' id='".$i."_2' style='width: 40px; text-align:center;'".$teste."/>
                         </div>
                     </div>
                 </form>
@@ -108,7 +114,7 @@ if(isset($_POST["post_id"]))
     ";
     $id_partida++;
     }
-    if($bloqdate==0){
+    if($countdate<10){
         $output .= "
         <div class='col-12 text-right'>
             <div class='custom-nav'>

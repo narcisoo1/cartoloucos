@@ -21,11 +21,13 @@ function pontosRodada($id,$id_rodada){
         $jogos=json_decode(rodada($id_rodada),true);
         $id_partida = 123754+(($id_rodada-1)*10);
         for($i=1;$i<=10;$i++){
-            if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
-                $pontos+=3;
-            }else{
-                if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
-                    $pontos+=1;
+            if($row['j'.$i.'_t1']>=0 && $row['j'.$i.'_t2']>=0){
+                if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
+                    $pontos+=3;
+                }else{
+                    if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
+                        $pontos+=1;
+                    }
                 }
             }
             $id_partida++;
@@ -76,15 +78,17 @@ function pontosGerais($array1){
             $jogos=json_decode(rodada($row['rodada']),true);
             $id_partida = 123754+(($row['rodada']-1)*10);
             for($i=1;$i<=10;$i++){
-                if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
-                    $array['pontos']+=3;
-                    $array['t']+=1;
-                }else{
-                    if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
-                        $array['pontos']+=1;
-                        $array['p']+=1;
+                if($row['j'.$i.'_t1']>=0 && $row['j'.$i.'_t2']>=0){
+                    if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
+                        $array['pontos']+=3;
+                        $array['t']+=1;
                     }else{
-                        $array['e']+=1;
+                        if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
+                            $array['pontos']+=1;
+                            $array['p']+=1;
+                        }else{
+                            $array['e']+=1;
+                        }
                     }
                 }
                 $id_partida++;
@@ -113,17 +117,19 @@ function pontosGeraisRodada($array1){
             $jogos=json_decode(rodada($row['rodada']),true);
             $id_partida = 123754+(($row['rodada']-1)*10);
             for($i=1;$i<=10;$i++){
-                if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
-                    $array['pontos']+=3;
-                    $array['t']+=1;
-                }else{
-                    if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
-                        $array['pontos']+=1;
-                        $array['p']+=1;
+                if($row['j'.$i.'_t1']>=0 && $row['j'.$i.'_t2']>=0){
+                    if($jogos[$id_partida]['placar1']==$row['j'.$i.'_t1'] && $jogos[$id_partida]['placar2']==$row['j'.$i.'_t2']){
+                        $array['pontos']+=3;
+                        $array['t']+=1;
                     }else{
-                        $array['e']+=1;
+                        if($jogos[$id_partida]['placar1'] != '' && $jogos[$id_partida]['placar2'] != '' && ((($jogos[$id_partida]['placar1']>$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']>$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']<$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']<$row['j'.$i.'_t2'])) || (($jogos[$id_partida]['placar1']==$jogos[$id_partida]['placar2']) && ($row['j'.$i.'_t1']==$row['j'.$i.'_t2'])))){
+                            $array['pontos']+=1;
+                            $array['p']+=1;
+                        }else{
+                            $array['e']+=1;
+                        }
                     }
-                }
+                }                
                 $id_partida++;
             }
         }
