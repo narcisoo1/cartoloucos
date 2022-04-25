@@ -15,7 +15,7 @@
       $data = $json_dados;
           
 
-    #print_r (proximojogo());
+    #print_r (jogo(123759));
 
     // retorna dados da equipe
     function equipe($id_time){
@@ -35,6 +35,27 @@
 
     }
 
+    // retorna o jogo setado pelo ID
+    function jogo($id){
+
+      if(!isset($id)){
+        return json_encode(array('erro' => '401', 'msg' => 'id is required'));
+      }
+      global $data;
+      $obj = $data;
+      $id = $id;
+
+      foreach ($obj->fases as $key => $value) {
+        $jogos = $value->jogos;
+
+        $jogo = array();
+
+        $jogo = $jogos->id->$id;
+        return json_encode($jogo);
+
+      }
+
+    }
 
     // retorna todos os jogos de determinada rodada
     function rodada($rodada){
@@ -161,10 +182,8 @@
       date_default_timezone_set('America/Sao_Paulo');
       $today = date("Y-m-d");
 
-      $rodada=ultimaRodada();
       global $data;
       $obj = $data;
-      $rodada = $rodada;
       $control = 0;
       $proximojogo = null;
 
@@ -173,7 +192,7 @@
 
         $jogo = array();
         foreach ($jogos->data as $key => $value) {
-          if($key>$today){
+          if($key>=$today){
               $idjogo=$jogos->data->$key[0];
               if ($control==0){
                 $jogo=json_decode(json_encode($jogos->id->$idjogo), true);
