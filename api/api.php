@@ -15,7 +15,7 @@
       $data = $json_dados;
           
 
-    #print_r (jogo(123759));
+    #print_r (ultimoJogo());
 
     // retorna dados da equipe
     function equipe($id_time){
@@ -161,11 +161,13 @@
         foreach ($jogos->rodada->$rodada as $key => $value) {
           $idjogo = $value;
           $jogo[$idjogo] = $jogos->id->$idjogo;
-          if ($control==0){
-            $ultimoJogo=$jogo[$idjogo];
+          if ($control==0 && json_decode(json_encode($jogo[$idjogo]->placar1!=null), true)){
+            $ultimoJogo= json_decode(json_encode($jogo[$idjogo]), true);
+            $control++;
           }else{
-            if($jogo[$idjogo]['data']>=$ultimoJogo['data']){
-              if($jogo[$idjogo]['horario']>$ultimoJogo['horario']){
+            #print_r ($ultimoJogo['data']);
+            if(json_decode(json_encode($jogo[$idjogo]->data), true) <=$ultimoJogo['data']){
+              if(json_decode(json_encode($jogo[$idjogo]->horario), true)>$ultimoJogo['horario']){
                 $ultimoJogo=$jogo[$idjogo];
               }
             }
