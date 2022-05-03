@@ -126,19 +126,27 @@ if($_SESSION["permissao"]==5){
       <div class="container">
       <div class="row" id="serase">
           <div class="col-6 title-section">
-            <h2 class="heading">Rodada 1</h2>
-            <input type="text" id="numrodada" name="1" style="display:none;"/>
+            <h2 class="heading">Rodada <?php echo ultimaRodada();?></h2>
+            <input type="text" id="numrodada" name=<?php echo ultimaRodada();?> style="display:none;"/>
           </div>
           <div class="col-6 text-right">
             <div class="custom-nav">
-            <button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="0" disabled>Voltar</button>
-            <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="2">Avançar</button>
+            <?php
+              $rodadaat=ultimaRodada();
+                if(ultimaRodada()==1){  
+                  echo '<button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="0" disabled>Voltar</button>
+                  <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="2">Avançar</button>';
+                }else{
+                  echo '<button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="'.($rodadaat-1).'">Voltar</button>
+                  <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="'.($rodadaat+1).'">Avançar</button>';
+                }
+              ?>
             </div>
           </div>
         
         <div class="row">
           <?php
-            $id_rodada=1;
+            $id_rodada=ultimaRodada();
             $control=false;
             $countdate=0;
             $bloqdate=0;
@@ -153,7 +161,7 @@ if($_SESSION["permissao"]==5){
             }
             $const = 123754;
             
-            $data = json_decode($json);
+            #$data = json_decode($json);
             $rodada = json_decode(rodada($id_rodada),true);
             $id_partida = 123754+(($id_rodada-1)*10);
             for($i = 0 ; $i < 10; $i++){

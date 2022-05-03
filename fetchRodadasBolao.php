@@ -36,7 +36,7 @@ if(isset($_POST["post_id"]))
     
     $const = 123754;
     $id_rodada=$_POST["post_id"];
-    $data = json_decode($json);
+    #$data = json_decode($json);
     $rodada = json_decode(rodada($id_rodada),true);
     $id_partida = 123754+(($id_rodada-1)*10);
     

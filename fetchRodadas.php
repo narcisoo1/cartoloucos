@@ -20,7 +20,7 @@ if(isset($_POST["post_id"]))
   }
     $const = 123754;
     $id_rodada=$_POST["post_id"];
-    $data = json_decode($json);
+    #$data = json_decode($json);
     $rodada = json_decode(rodada($id_rodada),true);
     $id_partida = 123754+(($id_rodada-1)*10);
     $output .= '<div class="col-6 title-section">
@@ -48,6 +48,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-1 text-center'>
                             <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
+                            <h3>".$rodada[$id_partida]['placar1']."</h3>
                         </div>
                         <div>
                             <span class='vs'><span>VS</span></span>
@@ -55,6 +56,7 @@ if(isset($_POST["post_id"]))
                         <div class='team-2 text-center'>
                             <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                             <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
+                            <h3>".$rodada[$id_partida]['placar2']."</h3>
                         </div>
                     </div>
                 </form>

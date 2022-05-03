@@ -187,13 +187,22 @@ include 'api/api.php';
 
         <div class="row" id="serase">
           <div class="col-6 title-section">
-            <h2 class="heading">Rodada 1</h2>
-            <input type="text" id="numrodada" name="1" style="display:none;"/>
+            <h2 class="heading">Rodada <?php echo ultimaRodada();?></h2>
+            <input type="text" id="numrodada" name=<?php echo ultimaRodada();?> style="display:none;"/>
           </div>
           <div class="col-6 text-right">
             <div class="custom-nav">
-            <button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="0" disabled>Voltar</button>
-            <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="2">Avançar</button>
+              <?php
+              $rodadaat=ultimaRodada();
+                if(ultimaRodada()==1){  
+                  echo '<button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="0" disabled>Voltar</button>
+                  <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="2">Avançar</button>';
+                }else{
+                  echo '<button type="button" name="pserase" class="btn btn-primary btn-sm pserase" id="'.($rodadaat-1).'">Voltar</button>
+                  <button type="button" name="nserase" class="btn btn-primary btn-sm nserase" id="'.($rodadaat+1).'">Avançar</button>';
+                }
+              ?>
+            
             </div>
           </div>
         
@@ -201,12 +210,11 @@ include 'api/api.php';
           <?php
           
             $const = 123754;
-            $id_rodada=1;
-            $data = json_decode($json);
+            $id_rodada=ultimaRodada();
+            $data = $data;
             $rodada = json_decode(rodada($id_rodada),true);
             $id_partida = 123754+(($id_rodada-1)*10);
             for($i = 0 ; $i < 10; $i++){
-              
               echo "
             <div class='col-lg-6 mb-4'>
               <div class='bg-light p-4 rounded'>
@@ -217,6 +225,7 @@ include 'api/api.php';
                       <div class='team-1 text-center'>
                         <img src='".str_replace('4', '6', json_decode(equipe($rodada[$id_partida]['time1']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time1']),true)['sigla']."</h3>
+                        <h3>".$rodada[$id_partida]['placar1']."</h3>
                       </div>
                       <div>
                         <span class='vs'><span>VS</span></span>
@@ -224,6 +233,7 @@ include 'api/api.php';
                       <div class='team-2 text-center'>
                         <img src='".str_replace('4', '6',json_decode(equipe($rodada[$id_partida]['time2']),true)['brasao'])."' alt='Image'>
                         <h3>".json_decode(equipe($rodada[$id_partida]['time2']),true)['sigla']."</h3>
+                        <h3>".$rodada[$id_partida]['placar2']."</h3>
                       </div>
                     </div>
                   </form>

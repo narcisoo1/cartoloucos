@@ -10,12 +10,12 @@
 
       $json_dados  = json_decode(substr(trim(str_replace('simulador_dados_jsonp(','',file_get_contents($url_api))),0,-2));
 
-      $json = file_get_contents("https://raw.githubusercontent.com/narcisoo1/cartoloucos/main/api/db_br.json");
+      #$json = file_get_contents("https://raw.githubusercontent.com/narcisoo1/cartoloucos/main/api/db_br.json");
 
       $data = $json_dados;
           
 
-    #print_r (ultimoJogo());
+    #ultimoJogo();
 
     // retorna dados da equipe
     function equipe($id_time){
@@ -77,7 +77,7 @@
           $jogo[$idjogo] = $jogos->id->$idjogo;
 
         }
-
+        
         return json_encode($jogo);
 
       }
@@ -161,18 +161,22 @@
         foreach ($jogos->rodada->$rodada as $key => $value) {
           $idjogo = $value;
           $jogo[$idjogo] = $jogos->id->$idjogo;
-          if ($control==0 && json_decode(json_encode($jogo[$idjogo]->placar1!=null), true)){
+          if ($control==0 && json_decode(json_encode($jogo[$idjogo]->placar1), true)!=null){
             $ultimoJogo= json_decode(json_encode($jogo[$idjogo]), true);
             $control++;
           }else{
-            #print_r ($ultimoJogo['data']);
-            if(json_decode(json_encode($jogo[$idjogo]->data), true) <=$ultimoJogo['data']){
-              if(json_decode(json_encode($jogo[$idjogo]->horario), true)>$ultimoJogo['horario']){
-                $ultimoJogo=$jogo[$idjogo];
+            if(json_decode(json_encode($jogo[$idjogo]->data), true) > $ultimoJogo['data'] && json_decode(json_encode($jogo[$idjogo]->placar1),true) != '') {
+              #print_r (json_decode(json_encode($jogo[$idjogo]), true));
+              #echo "\n";
+              $ultimoJogo= json_decode(json_encode($jogo[$idjogo]), true);
+            }else{
+              if(json_decode(json_encode($jogo[$idjogo]->data), true) == $ultimoJogo['data'] && json_decode(json_encode($jogo[$idjogo]->placar1),true) != ''){
+                if(json_decode(json_encode($jogo[$idjogo]->horario), true)>$ultimoJogo['horario']){
+                  $ultimoJogo= json_decode(json_encode($jogo[$idjogo]), true);
+                }
               }
             }
-          }
-          
+          } 
         }
         
         return json_encode($ultimoJogo);
